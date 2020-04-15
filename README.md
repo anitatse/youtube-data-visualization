@@ -20,6 +20,9 @@ python -m SimpleHTTPServer 8000
 
 For a content creator looking to start a Youtube channel, they may be interested in researching the content already existing on Youtube to give them ideas on what kind of videos they should create to become popular. The popularity of videos on social media cannot simply be defined by the number of views. There are many other aspects that may determine the popularity of Youtube videos, including the number of likes, comments, and locations where said views are coming from. To address this challenge, we created a visualization that can allow a viewer to easily toggle through the different factors and see how they change between the top 10 video categories from a dataset. For our project, we show numerical comparisons of the 10 categories over time, while also showing how the numbers change according to the countries where the views come from. There is a bar chart to view the overall totals for the categories for a given year, while an interactive line and bubble chart lets you explore more facets of the video data including country and change over time.
 
+![](images/barchart.png)
+![](images/visualization.png)
+
 ## Data
 
 Data source: ​https://www.kaggle.com/datasnaek/youtube-new#CAvideos.csv

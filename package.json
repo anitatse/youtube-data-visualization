@@ -1,0 +1,11 @@
+{
+  "name": "project_youtube",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "http-server -d false -a 127.0.0.1 -p 8080"
+  },
+  "dependencies": {
+    "http-server": "^0.12.1"
+  }
+}

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Top 10 Trending Youtube Categories </title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;1,500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- sticky header -->
+    <div class="stickyheader">
+      <div style="width:800px; margin-left: auto; margin-right: auto;">
+          <select class="select-css" id="selected-total" style="width:160px; float:right;">
+            <option value="total_likes">Total Likes</option>
+            <option value="total_comments">Total Comments</option>
+            <option value="total_views" selected>Total Views</option>
+          </select>
+      </div>
+    </div>
+
+    <div style="padding:20px;"></div>
+
+    <h1>Top 10 Trending Youtube Categories</h1>
+
+    <div class="container" style="padding-bottom: 35px; text-align:right; color: #595959;">
+      <text>By Anita Tse, Leo Lin, Michael Goh</text>
+    </div>
+    <div class="container">
+      <text>In this visualization, we gather statistics of 352,971 Youtube videos selected from the top 10 categories across 10 different countries, and published between November 2017 and June 2018. Use the dropdown menu above to toggle between likes, comments, and views for all of these visualizations. The top 10 countries visualized here are Canada, Germany, France, Great Britain, India, Japan, Korea, Mexico, Russia, and United states, with the top 10 categories being Entertainment, People & Blogs, Music, News & Politics, Comedy, Sports, Film & Animation, Howto & Style, Gaming, and Science & Technology.<br><br> Explore the Kaggle dataset <a href="https://www.kaggle.com/datasnaek/youtube-new#CAvideos.csv" target="_blank">here</a>.</text>
+    </div>
+
+
+
+    <!-- bar chart view -->
+    <div style="width:780px; margin-left: auto; margin-right: auto;">
+        <!-- date range slider -->
+        <div>
+            <h2>Totals by Category</h2>
+            <div class="container">
+              <text>Move the slider to see how the distributions of likes, comments, and views vary in each month between November 2017 and June 2018.</text>
+            </div>
+            <input type="range" id="barchart-date-slider" name="date-slider" value="0" min="0" max="7" step="1">
+            <span id="date-selection" style="float:right;">2017-11</span>
+            <button id="play-button" style="float:right; margin-right: 10px;">Play</button>
+        </div>
+
+        <!-- load spinner -->
+        <div id="loader"></div>
+        <!-- bar chart here -->
+        <svg id="barchart"></svg>
+
+    </div>
+
+    <h2>Explore by Country</h2>
+    <div class="container">
+      <text>Feel free to click and hover to explore likes, comments, and views across different months, countries, and categories. The bubbles in the bubble chart are sized according to the number of views, comments, and likes falling under the bubble's category, and the line chart show's trends over time for a given country. Hover over points to see actual numbers, and click on bubbles to see where they reflect on the line chart.</text>
+    </div>
+
+    <div style="display:flex; width:100%; justify-content: center; align-items: center; margin-left:auto; margin-right:auto;">
+
+        <div style="float:left;">
+            <button id="change-view-btn" style="display: none; margin-right: 20px;">Contract</button>
+            <div>
+                <svg id="innovative"></svg>
+            </div>
+        </div>
+
+        <div style="float:right;padding-right: 50px;">
+            <!-- Dropdown -->
+            <select class="select-css" id="linechart-selected-country" style="width:150px; float:right;">
+                <option value="CA" selected>Canada</option>
+                <option value="DE">Germany</option>
+                <option value="FR">France</option>
+                <option value="GB">Great Britain</option>
+                <option value="IN">India</option>
+                <option value="JP">Japan</option>
+                <option value="KR">Korea</option>
+                <option value="MX">Mexico</option>
+                <option value="RU">Russia</option>
+                <option value="US">United States</option>
+            </select>
+            <!-- Empty SVG drawing area -->
+            <div>
+                <svg id="linechart"></svg>
+            </div>
+            <div style="max-width: 225px; float:left;">
+                <!-- first column of checkboxes -->
+                <br><div class="square" style="background-color: #24A121;"></div><input checked type="checkbox" id="Entertainment-checkbox" class="checkbox"> <text>Entertainment</text>
+                <br><div class="square" style="background-color: #9564BF;"></div><input checked type="checkbox" id="PeopleBlogs-checkbox" class="checkbox"> <text>People & Blogs</text>
+                <br><div class="square" style="background-color: #1776B6;"></div><input checked type="checkbox" id="Music-checkbox" class="checkbox"> <text>Music</text>
+                <br><div class="square" style="background-color: #FF7F00;"></div><input checked type="checkbox" id="Comedy-checkbox" class="checkbox"> <text>Comedy</text>
+                <br><div class="square" style="background-color: #00BED1;"></div><input checked type="checkbox" id="Sports-checkbox" class="checkbox"> <text>Sports</text>
+            </div>
+            <div style="max-width: 225px; float:right;">
+                <!-- second column of checkboxes -->
+                <br><div class="square" style="background-color: #D8241F;"></div><input checked type="checkbox" id="NewsPolitics-checkbox" class="checkbox"> <text>News & Politics</text>
+                <br><div class="square" style="background-color: #8D5649;"></div><input checked type="checkbox" id="HowtoStyle-checkbox" class="checkbox"> <text>How to Style</text>
+                <br><div class="square" style="background-color: #7F7F7F;"></div><input checked type="checkbox" id="ScienceTechnology-checkbox" class="checkbox"> <text>Science & Technology</text>
+                <br><div class="square" style="background-color: #BCBE00;"></div><input checked type="checkbox" id="Gaming-checkbox" class="checkbox"> <text>Gaming</text>
+                <br><div class="square" style="background-color: #E574C3;"></div><input checked type="checkbox" id="FilmAnimation-checkbox" class="checkbox"> <text>Film & Animation</text>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.12.0/d3.js"></script>
+    <script src="https://unpkg.com/textures@1.2.0/dist/textures.js"></script>
+    <!--<script src="js/truncate_data.js"></script>-->
+    <script src="js/general_preprocessing.js"></script>
+    <script src="js/barchart_preprocessing.js"></script>
+    <script src="js/barchart.js"></script>
+    <script src="js/linechart_preprocessing.js"></script>
+    <script src="js/linechart.js"></script>
+    <script src="js/innovative_preprocessing.js"></script>
+    <script src="js/innovative.js"></script>
+
+</body>
+</html>
